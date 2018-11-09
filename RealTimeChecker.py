@@ -6,74 +6,24 @@ from SimpleDBUsingSqlite3 import SimpleDBUsingSqlite3
 
 
 def main(args):
-	email_send_list = ['happyjacket@qq.com']
-
-	xiuLuoWuShen = UpdateMonitorBaseClass(
-		email_send_list,
-		'修罗武神',
-		'http://www.17k.com/book/493239.html',
-		'<a href="http://www.17k.com/(chapter/493239/\d+.html)" target="_blank">([^<]*)</a>',
-		dbClass=SimpleDBUsingSqlite3,
-		tips = '章小说',
-		url_prefix = 'http://www.17k.com/'
-		)
-
-
-	# bigBang = UpdateMonitorBaseClass(
-	# 	email_send_list,
-	# 	'生活大爆炸',
-	# 	'http://www.meijuworld.com/11838.html',
-	# 	'<a href="https://pan.baidu.com/s/([^"]+)" target="_blank">([^<]+)</a>',
-	# 	tips = '集',
-	# 	url_prefix = 'https://pan.baidu.com/s/',
-	# 	dbClass = SimpleDBUsingFS
-	# 	)
-
-	sdcs = UpdateMonitorBaseClass(
-		email_send_list,
-		'《学院官网》',
-		'http://sdcs.sysu.edu.cn',
-		'<a href="/(content/\d+)"[^>]*>([^"]*)</a>',
-		tips = '条通知',
-		url_prefix = 'http://sdcs.sysu.edu.cn/',
-		)
+    email_send_list = ['767470799@qq.com']
+    dazhuzai = UpdateMonitorBaseClass(
+        email_send_list,
+        '《剑来》',
+        'http://book.zongheng.com/showchapter/672340.html',
+        '<a  href=\"http:\/\/book.zongheng.com\/chapter\/672340/(.*?)\" target=\"_blank\" title=\"(.*?)\">(.*?)<\/a>',
+        url_prefix='http://book.zongheng.com/chapter/672340/',
+        tips='章',
+    )
+    dadaochaotian = UpdateMonitorBaseClass(
+        email_send_list,
+        '《大道朝天》',
+        'https://book.qidian.com/info/1010496369#Catalog',
+        '<a href="\/\/vipreader.qidian.com\/chapter\/1010496369\/(.*?)\" .*?title=\"(.*?)\">(.*?)<\/a>',
+        url_prefix='http://vipreader.qidian.com/chapter/1010496369/',
+        tips='章',
+    )
 
 
-	# wanGuShenDi = UpdateMonitorBaseClass(
-	# 	email_send_list,
-	# 	'万古神帝',
-	# 	'http://www.heiyange.com/book/4113/',
-	# 	'<a href="/(book/4113/\d+.html)">([^<]*)</a>',
-	# 	dbClass=SimpleDBUsingSqlite3,
-	# 	tips = '章小说',
-	# 	url_prefix = 'http://www.heiyange.com/',
-	# 	coding = 'gbk'
-	# 	)
-
-
-	# 这个网站在国内好像被墙了，换成IP地址就好了……
-	#email_send_list + ['853242365@qq.com'],
-	dzz_url = '107.151.164.90'
-	dazhuzai = UpdateMonitorBaseClass(
-		['853242365@qq.com'],
-		'《大主宰》', 
-		'http://{0}/html/4/4317/index.html'.format(dzz_url),
-		'<a href="(\d+.html)">([^<]*)</a>',
-		url_prefix = 'http://{0}/html/4/4317/'.format(dzz_url),
-		coding = 'gbk'
-		)
-
-
-	# 漫画：给我来个小和尚
-	xiaoHeShang = UpdateMonitorBaseClass(
-		email_send_list,
-		'《给我来个小和尚》',
-		'http://www.kuaikanmanhua.com/web/topic/588/',
-		'<a href="/(web/comic/\d*/)" title="([^"]*)">[^<]*</a>',
-		tips = '话漫画',
-		url_prefix = 'http://www.kuaikanmanhua.com/'
-		)
-
-	
 if __name__ == '__main__':
-	exit(main(sys.argv[1:]))
+    exit(main(sys.argv[1:]))

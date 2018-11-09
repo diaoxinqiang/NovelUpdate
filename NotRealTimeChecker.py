@@ -6,7 +6,7 @@ from SimpleDBUsingSqlite3 import SimpleDBUsingSqlite3
 
 
 def main(args):
-	email_send_list = ['happyjacket@qq.com']
+	email_send_list = ['767470799@qq.com']
 
 	googleBlog = UpdateMonitorBaseClass(
 		email_send_list,

@@ -7,8 +7,8 @@ from email.mime.text import MIMEText
 import smtplib
 
 
-from_addr = '1101925754@qq.com'
-password = 'dicttmcpysgtidfc'
+from_addr = '767470799@qq.com'
+password = 'vgzodaybdrtsbeaf'
 smtp_server = 'smtp.qq.com'
 port = 25
 
