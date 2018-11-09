@@ -125,46 +125,6 @@ sdcs.checkUpdate()
 ```
 
 
-## DaZhuZai.py（已去除）
-由于百度小说贴吧被查封，现在不再更新了，所以就找了另外一个专门的网站来做。当然，最好的办法还是：**支持正版**，到正版官网去看和订阅，自然会有很好的更新通知服务。
-
-由于我目前测试用的网站里面有一个推荐以往精彩章节的功能，所以经常会爬取到以前的章节，所以这个时候就需要继承基类UpdateMonitorBaseClass来重写getTargetContent函数就足够了！！！
-
-其实这里只是为了说明，只需要继承UpdateMonitorBaseClass并实现其getTargetContent接口就可以很好地自定义需要。
-
-但其实我后期已经扩展了UpdateMonitorBaseClass的功能，所以基本不需要自定义了，用好UpdateMonitorBaseClass的参数即可！！！
-
-
-```python
-# -*- coding:utf-8 -*-
-import os
-import re
-
-from SinglePageSpider import SinglePageSpider
-from UpdateMonitorBaseClass import UpdateMonitorBaseClass
-
-
-class DaZhuZai(UpdateMonitorBaseClass):
-	def getTargetContent(self):
-		"""爬取大主宰中文网的帖子，不过由于它的页面太过丰富，所以需要重写基类的这个获取目标内容的函数
-
-		Returns: a list of update chapters' relative path and its title
-		such as [('http://dazhuzai.net.cn/dazhuzai-1309.html', 'title 1'), ]
-		"""
-		page = SinglePageSpider().getPage(self.url)
-		result = re.findall(self.pattern, page)
-		if result:
-			newestResult = []
-			for update in result:
-				if int(update[0]) > 1300:
-					url = 'http://dazhuzai.net.cn/dazhuzai-{0}.html'.format(update[0])
-					newestResult.append([url, update[1]])
-			return newestResult
-		else:
-			return None
-
-```
-
 
 # 优化与深入
 ## 1. 每次监测更新是线性遍历比较
