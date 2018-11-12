@@ -34,15 +34,15 @@ class SendMailReliablly:
             try:
                 result = send_email(email[0], email[1], email[2])
             except Exception as e:
-                result = {str(e)}
+                result = str(e)
                 ERROR('smtplib error happend.......................')
-
-            ERROR('send_result:', result)
+                ERROR('send_result:{0}'.format(result))
+            INFO('send_result:{0}'.format(result))
             if len(result) > 0:
                 now_fail_emails.append(email)
 
         self.db.delete_all()
-        ERROR("fail??? ", len(now_fail_emails))
+        INFO("fail:{0} ".format(len(now_fail_emails)))
         for email in now_fail_emails:
             email[0] = self.delimiter.join(email[0])
             self.db.insert(email)

@@ -50,7 +50,7 @@ class UpdateMonitorBaseClass:
                         else:
                             chapter_title = result[i][1]
                         result[i] = (chapter_url, chapter_title)
-                INFO('正则匹配成功:{0}'.format(len(result)))
+                INFO('正则匹配成功:{0}{1}'.format(len(result),self.tips))
                 return result
             else:
                 ERROR('正则匹配失败')
@@ -66,9 +66,9 @@ class UpdateMonitorBaseClass:
         2）与数据库里保存的数据比对，找出更新的数据；
         3）生成通知的邮件内容，扔给“可靠邮件发送器”发送
         """
-        INFO('Checking {0}...'.format(self.name))
+        INFO('爬取{0}章节目录中...'.format(self.name))
         currentTies = self.getTargetContent()
-        INFO('Got {0}...'.format(self.name))
+        INFO('获取 {0}章节成功'.format(self.name))
         if currentTies is None:
             return False
 
@@ -93,11 +93,10 @@ class UpdateMonitorBaseClass:
     def generate_noticification(self, new_contents):
         """generate email to notify the users about the new contents"""
         if new_contents is not None and len(new_contents) > 0:
-            if len(new_contents) > 1:
-                mail_title = '{0}更新了{1}{2}'.format(self.name, len(new_contents), self.tips)
+            mail_title = '{0}更新了{1}{2}'.format(self.name, len(new_contents), self.tips)
             if len(new_contents) == 1:
-                mail_title = '{0}更新:{1}'.format(self.name, new_contents[0][1])
-            content = mail_title + "：\n"
+                mail_title += ':{0}'.format(new_contents[0][1])
+            content = ''
             for (url, title) in new_contents:
                 content += '{0}\n{1}\n\n'.format(title, url)
             return [self.email_send_list, mail_title, content]

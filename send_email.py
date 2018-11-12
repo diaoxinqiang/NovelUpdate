@@ -2,7 +2,8 @@
 import smtplib
 import email.mime.multipart
 import email.mime.text
-
+import utf8logger
+from utf8logger import ERROR, INFO
 EMAIL_HOST = '767470799@qq.com'  # your email address
 EMAIL_PASS = 'itdgyfictwgobbii'  # your email account password
 # EMAIL_PASS = '*'   # your email account password
@@ -25,16 +26,16 @@ def send_email(to_whom_list, title, content):
         smtp.login(EMAIL_HOST, EMAIL_PASS)
         result = smtp.sendmail(EMAIL_HOST, to_whom_list, str(msg))
     except Exception as e:
-        print('exception when send_email...')
-        print(e)
+        ERROR('exception when send_email...')
+        ERROR(str(e))
         have_exception = True
     finally:
         smtp.quit()
         if have_exception:
-            print('finally raise e: {0}'.format(str(e)))
+            ERROR('finally raise e: {0}'.format(str(e)))
             raise e
         else:
-            print('finally no exception raise')
+            INFO('finally no exception raise')
     return result
 
 # Example tl use the function:
