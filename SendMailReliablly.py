@@ -3,7 +3,8 @@ from send_email import send_email
 
 
 # from SimpleDBUsingFS import SimpleDBUsingFS
-
+import utf8logger
+from utf8logger import ERROR, INFO
 
 class SendMailReliablly:
     """可靠邮件发送器，发送失败会自动保存进数据库里，下次激活时自动重发"""
@@ -22,7 +23,7 @@ class SendMailReliablly:
         """
         emails_to_send = self.db.get_all()  # 以前发送失败的邮件
         if len(emails_to_send) > 0:
-            print('有{0}封发送失败的邮件'.format(len(emails_to_send)))
+            INFO('有{0}封发送失败的邮件'.format(len(emails_to_send)))
         # 由于收件人是一个列表，对于数据库的一个字段，所以需要存入时先序列化为字符串，读取则反过来
         for i in range(0, len(emails_to_send)):
             emails_to_send[i][0] = emails_to_send[i][0].splite(self.delimiter)
@@ -34,14 +35,14 @@ class SendMailReliablly:
                 result = send_email(email[0], email[1], email[2])
             except Exception as e:
                 result = {str(e)}
-                print('smtplib error happend.......................')
+                ERROR('smtplib error happend.......................')
 
-            print('send_result....', result)
+            ERROR('send_result:', result)
             if len(result) > 0:
                 now_fail_emails.append(email)
 
         self.db.delete_all()
-        print("fail??? ", len(now_fail_emails))
+        ERROR("fail??? ", len(now_fail_emails))
         for email in now_fail_emails:
             email[0] = self.delimiter.join(email[0])
             self.db.insert(email)

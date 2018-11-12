@@ -95,7 +95,7 @@ class UpdateMonitorBaseClass:
         if new_contents is not None and len(new_contents) > 0:
             if len(new_contents) > 1:
                 mail_title = '{0}更新了{1}{2}'.format(self.name, len(new_contents), self.tips)
-            # if len(new_contents) == 1:
+            if len(new_contents) == 1:
                 mail_title = '{0}更新:{1}'.format(self.name, new_contents[0][1])
             content = mail_title + "：\n"
             for (url, title) in new_contents:
