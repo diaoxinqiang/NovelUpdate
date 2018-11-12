@@ -45,8 +45,8 @@ class UpdateMonitorBaseClass:
                     for i in range(len(result)):
                         chapter_url = self.url_prefix + result[i][0]
                         if len(result[i]) >= 3:
-                                data = result[i][1:len(result[i])]
-                                chapter_title = '  '.join(reversed(data))
+                            data = result[i][1:len(result[i])]
+                            chapter_title = '  '.join(reversed(data))
                         else:
                             chapter_title = result[i][1]
                         result[i] = (chapter_url, chapter_title)
@@ -93,7 +93,10 @@ class UpdateMonitorBaseClass:
     def generate_noticification(self, new_contents):
         """generate email to notify the users about the new contents"""
         if new_contents is not None and len(new_contents) > 0:
-            mail_title = '{0}更新了{1}{2}'.format(self.name, len(new_contents), self.tips)
+            if len(new_contents) > 1:
+                mail_title = '{0}更新了{1}{2}'.format(self.name, len(new_contents), self.tips)
+            # if len(new_contents) == 1:
+                mail_title = '{0}更新:{1}'.format(self.name, new_contents[0][1])
             content = mail_title + "：\n"
             for (url, title) in new_contents:
                 content += '{0}\n{1}\n\n'.format(title, url)

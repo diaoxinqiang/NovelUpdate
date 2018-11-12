@@ -11,7 +11,7 @@ def main(args):
         email_send_list,
         '《剑来》',
         'http://book.zongheng.com/showchapter/672340.html',
-        '<a.*?href=\"http:\/\/book.zongheng.com\/chapter\/672340/(.*?)\" target=\"_blank\" title=\"(.*?)\">(.*?)<\/a>',
+        '<a.*?href=\"http:\/\/book.zongheng.com\/chapter\/672340/(.*?)\" target=\"_blank\" title=\"(.*?)\">.*?<\/a>',
         url_prefix='http://book.zongheng.com/chapter/672340/',
         tips='章',
     )
