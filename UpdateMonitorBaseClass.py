@@ -53,10 +53,10 @@ class UpdateMonitorBaseClass:
                 INFO('正则匹配成功:{0}{1}'.format(len(result),self.tips))
                 return result
             else:
-                ERROR('正则匹配失败')
+                ERROR('------正则匹配失败---------')
                 return None
         except Exception as e:
-            ERROR('获取网页失败：')
+            ERROR('-------获取网页失败：-------')
             ERROR(e)
             return None
 
@@ -80,14 +80,15 @@ class UpdateMonitorBaseClass:
                 self.db.insert([tie])
 
         if len(updateTies) == 0:
+            INFO('------没有更新-------')
             return False
-        INFO('更新了{0}{1}'.format(len(updateTies), self.tips))
+        INFO('-----更新了{0}{1}------'.format(len(updateTies), self.tips))
         to_whom_list, title, content = self.generate_noticification(updateTies)
         send_result = self.reliableEmailSender.send(to_whom_list, title, content)
         if send_result:
             INFO('发送邮件成功')
         else:
-            INFO('发送邮件失败，待重发')
+            INFO('-----发送邮件失败，待重发-------')
         return True
 
     def generate_noticification(self, new_contents):
