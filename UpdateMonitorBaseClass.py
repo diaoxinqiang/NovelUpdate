@@ -53,7 +53,7 @@ class UpdateMonitorBaseClass:
                 INFO('正则匹配成功:{0}{1}'.format(len(result),self.tips))
                 return result
             else:
-                ERROR('------正则匹配失败---------')
+                INFO('!!!!!!!!!!正则匹配size = 0!!!!!!!!!!!')
                 return None
         except Exception as e:
             ERROR('-------获取网页失败：-------')

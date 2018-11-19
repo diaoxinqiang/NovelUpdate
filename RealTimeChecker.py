@@ -15,6 +15,13 @@ def main(args):
         url_prefix='http://book.zongheng.com/chapter/672340/',
         tips='章',
     )
+    dazhuzai = UpdateMonitorBaseClass(
+        email_send_list,
+        '《剑来请假通知》',
+        'http://dq.tieba.com/f?kw=%E5%89%91%E6%9D%A5',
+        '<i.*?title=\"置顶\" ></i>\s+<a rel=\"noreferrer\" href=\"(.*?)\" title=\".*?\" target=\"_blank\" class=\"j_th_tit \">(.*?[请假|放假|烽火戏诸侯].*?)</a>',
+        tips='章',
+    )
     dadaochaotian = UpdateMonitorBaseClass(
         email_send_list,
         '《大道朝天》',
